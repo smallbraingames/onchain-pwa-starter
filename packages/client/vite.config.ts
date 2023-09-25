@@ -1,7 +1,11 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import { NodeGlobalsPolyfillPlugin } from "@esbuild-plugins/node-globals-polyfill";
 
 export default defineConfig({
+  define: {
+    "process.env": process.env,
+  },
   plugins: [react()],
   server: {
     port: 3000,
@@ -13,5 +17,17 @@ export default defineConfig({
     target: "es2022",
     minify: true,
     sourcemap: true,
+  },
+  optimizeDeps: {
+    esbuildOptions: {
+      define: {
+        global: "globalThis",
+      },
+      plugins: [
+        NodeGlobalsPolyfillPlugin({
+          buffer: true,
+        }),
+      ],
+    },
   },
 });
