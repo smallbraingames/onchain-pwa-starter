@@ -37,7 +37,7 @@ If you'd like embedded wallet functionality, **make sure the `Create Embedded Wa
 
 ### Configure Contracts
 
-This project uses [MUD](https://mud.dev), a solidity library and associated set of client libraries, for smart contracts & client-side onchain state syncing. For more info on MUD, look at [mud.dev](mud.dev)
+This project uses [MUD](https://mud.dev), a solidity library and associated set of client libraries, for smart contracts & client-side onchain state syncing. For more info on MUD, look at [mud.dev](https://mud.dev)
 
 ## Getting Help
 
