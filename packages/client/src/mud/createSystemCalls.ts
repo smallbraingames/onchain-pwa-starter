@@ -47,6 +47,8 @@ const createSystemCalls = (
       );
       return undefined;
     }
+    // Request chain switch if necessary
+    await walletClient.switchChain({ id: networkConfig.chain.id });
     const worldContract = createContract({
       address: networkConfig.worldAddress as Hex,
       abi: IWorldAbi,
