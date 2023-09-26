@@ -2,6 +2,7 @@ import { useComponentValue } from "@latticexyz/react";
 import { useMUD } from "./MUDContext";
 import { singletonEntity } from "@latticexyz/store-sync/recs";
 import Login from "./components/Login";
+import InstallAppPrompt from "./components/InstallAppPrompt";
 
 const Main = () => {
   const {
@@ -13,6 +14,7 @@ const Main = () => {
 
   return (
     <div>
+      <InstallAppPrompt />
       <Login />
       <div>
         Counter: <span>{counter?.value ?? "??"}</span>

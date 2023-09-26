@@ -6,7 +6,7 @@ import {
   useState,
 } from "react";
 import { SetupResult } from "./mud/setup";
-import { useAccount } from "wagmi";
+import { useAccount, useSwitchNetwork, useNetwork } from "wagmi";
 import requestDrip from "./mud/requestDrip";
 import { usePrivyWagmi } from "@privy-io/wagmi-connector";
 import { useWallets } from "@privy-io/react-auth";
@@ -30,7 +30,9 @@ export const useMUD = () => {
   const [, setDripInterval] = useState<NodeJS.Timer | undefined>(undefined);
   const { wallets } = useWallets();
   const { setActiveWallet } = usePrivyWagmi();
+  const { switchNetwork } = useSwitchNetwork();
   const { address } = useAccount();
+  const { chain } = useNetwork();
 
   // Set Privy's active wallet to the first connected wallet
   useEffect(() => {
