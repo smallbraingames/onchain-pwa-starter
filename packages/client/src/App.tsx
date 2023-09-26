@@ -1,21 +1,33 @@
-import { PrivyProvider } from "@privy-io/react-auth";
-import Main from "./components/Main";
+import { useComponentValue } from "@latticexyz/react";
+import { useMUD } from "./MUDContext";
+import { singletonEntity } from "@latticexyz/store-sync/recs";
+import Login from "./components/Login";
 
-const PRIVY_APP_ID = import.meta.env.VITE_PRIVY_APP_ID;
+const Main = () => {
+  const {
+    components: { Counter },
+    systemCalls,
+  } = useMUD();
 
-const App = () => {
-  if (!PRIVY_APP_ID) throw new Error("[App] Missing Privy app id");
+  const counter = useComponentValue(Counter, singletonEntity);
 
   return (
-    <PrivyProvider
-      appId={PRIVY_APP_ID}
-      config={{
-        loginMethods: ["email", "wallet"],
-      }}
-    >
-      <Main />
-    </PrivyProvider>
+    <div>
+      <Login />
+      <div>
+        Counter: <span>{counter?.value ?? "??"}</span>
+      </div>
+      <button
+        type="button"
+        onClick={async (event) => {
+          event.preventDefault();
+          console.log("new counter value:", await systemCalls?.increment());
+        }}
+      >
+        Increment
+      </button>
+    </div>
   );
 };
 
-export default App;
+export default Main;
